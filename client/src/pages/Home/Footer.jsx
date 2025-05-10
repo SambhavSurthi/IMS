@@ -79,9 +79,9 @@ const Footer = () => {
                   />
                 </svg>
                 <span>
-                  123 Business Ave, Suite 100
+                  KL University
                   <br />
-                  San Francisco, CA 94107
+                  Vijayawada, 522502
                 </span>
               </li>
               <li>
@@ -101,7 +101,7 @@ const Footer = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span>support@inventopro.com</span>
+                <span>sambhavsurthi14@gmail.com</span>
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -113,7 +113,7 @@ const Footer = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span>+1 (555) 123-4567</span>
+                <span>+91 630474994</span>
               </li>
             </ul>
           </div>

@@ -93,7 +93,7 @@ const ContactUs = () => {
       <div className="contact-container">
         <div className="contact-info">
           <h2>Get In Touch</h2>
-          <p>Have questions about InventoPro? Contact us and we'll be happy to help you.</p>
+          <p>Have questions about IMS? Contact us and we'll be happy to help you.</p>
 
           <div className="contact-methods">
             <div className="contact-method">
@@ -142,7 +142,7 @@ const ContactUs = () => {
               </div>
               <div className="contact-text">
                 <h3>Email Us</h3>
-                <p>support@inventopro.com</p>
+                <p>sambhavsurthi14@gmail.com</p>
               </div>
             </div>
 
@@ -160,7 +160,7 @@ const ContactUs = () => {
               </div>
               <div className="contact-text">
                 <h3>Call Us</h3>
-                <p>+1 (555) 123-4567</p>
+                <p>630474994</p>
               </div>
             </div>
           </div>

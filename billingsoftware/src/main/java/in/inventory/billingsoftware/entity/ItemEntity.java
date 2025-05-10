@@ -34,6 +34,9 @@ public class ItemEntity {
 
     private String description;
 
+    @Column(nullable = false)
+    private Integer stock = 0;
+
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp createdAt;

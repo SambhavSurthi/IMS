@@ -13,6 +13,7 @@ const ItemForm = () => {
         categoryId: "",
         price: "",
         description: "",
+        stock: 0 // Added stock field with default value 0
     });
 
     const onChangeHandler = (e) => {
@@ -37,13 +38,18 @@ const ItemForm = () => {
             if (response.status === 201) {
                 setItemsData([...itemsData, response.data]);
                 setCategories((prevCategories) =>
-                prevCategories.map((category) => category.categoryId === data.categoryId ? {...category, items: category.items + 1} : category));
+                prevCategories.map((category) => 
+                    category.categoryId === data.categoryId ? 
+                    {...category, items: category.items + 1} : 
+                    category
+                ));
                 toast.success("Item added");
                 setData({
                     name: "",
                     description: "",
                     price: "",
                     categoryId: "",
+                    stock: 0 // Reset stock to 0 on success
                 })
                 setImage(false);
             } else {
@@ -95,7 +101,30 @@ const ItemForm = () => {
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="price" className="form-label">Price</label>
-                                    <input type="number" name="price" id="price" className="form-control" placeholder="&#8377;200.00" onChange={onChangeHandler} value={data.price} required/>
+                                    <input type="number" 
+                                           name="price" 
+                                           id="price" 
+                                           className="form-control" 
+                                           placeholder="&#8377;200.00" 
+                                           onChange={onChangeHandler} 
+                                           value={data.price} 
+                                           required
+                                           min="0"
+                                           step="0.01"
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="stock" className="form-label">Initial Stock</label>
+                                    <input type="number" 
+                                           name="stock" 
+                                           id="stock" 
+                                           className="form-control" 
+                                           placeholder="0"
+                                           onChange={onChangeHandler}
+                                           value={data.stock}
+                                           min="0"
+                                           required
+                                    />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="description" className="form-label">Description</label>
@@ -108,7 +137,9 @@ const ItemForm = () => {
                                         onChange={onChangeHandler}
                                         value={data.description}></textarea>
                                 </div>
-                                <button type="submit" className="btn btn-warning w-100" disabled={loading}>{loading ? "Loading..." : "Save"}</button>
+                                <button type="submit" className="btn btn-warning w-100" disabled={loading}>
+                                    {loading ? "Loading..." : "Save"}
+                                </button>
                             </form>
                         </div>
                     </div>

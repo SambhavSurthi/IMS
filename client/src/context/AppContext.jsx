@@ -12,12 +12,24 @@ export const AppContextProvider = (props) => {
     const [cartItems, setCartItems] = useState([]);
 
     const addToCart = (item) => {
-        const existingItem = cartItems.find(cartItem => cartItem.name === item.name);
-        if (existingItem) {
-            setCartItems(cartItems.map(cartItem => cartItem.name === item.name ? {...cartItem, quantity: cartItem.quantity + 1} : cartItem));
-        } else {
-            setCartItems([...cartItems, {...item, quantity: 1}]);
-        }
+        setCartItems(prevItems => {
+            const existingItem = prevItems.find(cartItem => cartItem.itemId === item.itemId);
+            
+            if (existingItem) {
+                // If item exists, check if we can add more
+                if (existingItem.quantity >= item.stock) {
+                    return prevItems; // Don't add if we've reached stock limit
+                }
+                return prevItems.map(cartItem =>
+                    cartItem.itemId === item.itemId
+                        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                        : cartItem
+                );
+            }
+            
+            // If item doesn't exist in cart, add it with quantity 1
+            return [...prevItems, { ...item, quantity: 1 }];
+        });
     }
 
     const removeFromCart = (itemId) => {
@@ -27,6 +39,16 @@ export const AppContextProvider = (props) => {
     const updateQuantity = (itemId, newQuantity) => {
         setCartItems(cartItems.map(item => item.itemId === itemId ? {...item, quantity: newQuantity} : item));
     }
+
+    const updateStock = (itemId, newStock) => {
+        setItemsData(prevItems => 
+            prevItems.map(item => 
+                item.itemId === itemId 
+                    ? { ...item, stock: newStock }
+                    : item
+            )
+        );
+    };
 
     useEffect(() => {
         async function loadData() {
@@ -65,7 +87,8 @@ export const AppContextProvider = (props) => {
         cartItems,
         removeFromCart,
         updateQuantity,
-        clearCart
+        clearCart,
+        updateStock
     }
 
     return <AppContext.Provider value={contextValue}>

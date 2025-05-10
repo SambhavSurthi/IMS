@@ -61,6 +61,7 @@ public class ItemServiceImpl implements ItemService {
                 .categoryId(newItem.getCategory().getCategoryId())
                 .createdAt(newItem.getCreatedAt())
                 .updatedAt(newItem.getUpdatedAt())
+                .stock(newItem.getStock())
                 .build();
     }
 
@@ -70,7 +71,21 @@ public class ItemServiceImpl implements ItemService {
                 .name(request.getName())
                 .description(request.getDescription())
                 .price(request.getPrice())
+                .stock(request.getStock() != null ? request.getStock() : 0) // Add this line
                 .build();
+    }
+
+    public ItemResponse updateStock(String itemId, Integer quantity) {
+        ItemEntity item = itemRepository.findByItemId(itemId)
+                .orElseThrow(() -> new RuntimeException("Item not found: "+itemId));
+
+        if (item.getStock() + quantity < 0) {
+            throw new RuntimeException("Cannot reduce stock below zero");
+        }
+
+        item.setStock(item.getStock() + quantity);
+        item = itemRepository.save(item);
+        return convertToResponse(item);
     }
 
     @Override

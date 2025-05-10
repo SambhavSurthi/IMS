@@ -6,20 +6,23 @@ import DisplayItems from "../../components/DisplayItems/DisplayItems.jsx";
 import CustomerForm from "../../components/CustomerForm/CustomerForm.jsx";
 import CartItems from "../../components/CartItems/CartItems.jsx";
 import CartSummary from "../../components/CartSummary/CartSummary.jsx";
+import { Toaster } from 'react-hot-toast';
 
 const Explore = () => {
     const {categories} = useContext(AppContext);
     const [selectedCategory, setSelectedCategory] = useState("");
     const [customerName, setCustomerName] = useState("");
     const [mobileNumber, setMobileNumber] = useState("");
+
     return (
         <div className="explore-container text-light">
+            <Toaster position="top-right" />
             <div className="left-column">
                 <div className="first-row" style={{overflowY: 'auto'}}>
                     <DisplayCategory
                         selectedCategory={selectedCategory}
                         setSelectedCategory={setSelectedCategory}
-                        categories={categories} />
+                    />
                 </div>
                 <hr className="horizontal-line" />
                 <div className="second-row" style={{overflowY: 'auto'}}>

@@ -1,3 +1,34 @@
+:root {
+  /* Primary Colors */
+  --bg-primary: #f9f9fb;        /* Soft off-white background */
+  --bg-secondary: #e3e7f0;      /* Light bluish-gray */
+
+  /* Accent Colors */
+  --accent-primary: #4f8ef7;    /* Bright sky blue */
+  --accent-secondary: #ff6b6b;  /* Soft coral red */
+
+  /* Text Colors */
+  --text-light: #000000;        /* Pure white */
+  --text-dark: #2c3e50;         /* Dark gray-blue */
+  --text-muted: #7f8c8d;        /* Muted gray */
+
+  /* UI Colors */
+  --border-color: rgba(0, 0, 0, 0.1);  /* Light shadow for light theme */
+  --shadow-color: rgba(0, 0, 0, 0.05); /* Very soft shadow */
+  --success-color: #58d68d;     /* Fresh green */
+  --warning-color: #f8c471;     /* Soft amber */
+  --danger-color: #f1948a;      /* Light rose red */
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #6fb1fc 0%, #4364f7 100%);
+  --gradient-secondary: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+
+  /* Transitions */
+  --transition-speed: 0.3s;
+}
+
+
+
 .navbar {
   position: fixed;
   top: 0;
@@ -9,7 +40,7 @@
   padding: 0 2rem;
   z-index: 1000;
   transition: all 0.3s ease;
-  background-color: transparent;
+  background-color: var(--bg-secondary);
 }
 
 .navbar-scrolled {

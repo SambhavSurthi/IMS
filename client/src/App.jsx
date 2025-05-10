@@ -12,6 +12,7 @@ import {useContext} from "react";
 import {AppContext} from "./context/AppContext.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import Homepage from "./pages/Home/Homepage.jsx";
+import Stocks from "./pages/Stock/Stocks.jsx";
 
 const App = () => {
     const location = useLocation();
@@ -30,7 +31,7 @@ const App = () => {
         }
 
         if (allowedRoles && !allowedRoles.includes(auth.role)) {
-            return <Navigate to="/dashboard" replace />;
+            return <Navigate to="/explore" replace />;
         }
 
         return element;
@@ -41,13 +42,14 @@ const App = () => {
             {location.pathname !== "/login" && location.pathname !== '/' && <Menubar />}
             <Toaster />
             <Routes>
-                <Route path="/dashboard" element={<Dashboard />} />
+                
                 <Route path="/explore" element={<Explore />} />
                 {/*Admin only routes*/}
+                <Route path="/dashboard"  element={<ProtectedRoute element={<Dashboard />} allowedRoles={["ROLE_ADMIN"]} />} />
                 <Route path="/category" element={<ProtectedRoute element={<ManageCategory />} allowedRoles={['ROLE_ADMIN']} />} />
                 <Route path="/users" element={<ProtectedRoute element={<ManageUsers />} allowedRoles={["ROLE_ADMIN"]} />} />
                 <Route path="/items" element={<ProtectedRoute element={<ManageItems />} allowedRoles={["ROLE_ADMIN"]} /> } />
-
+                <Route path="/Stock" element={<ProtectedRoute element={<Stocks />} allowedRoles={["ROLE_ADMIN"]} /> } />
                 <Route path="/login" element={<LoginRoute element={<Login />} />} />
                 <Route path="/orders" element={<OrderHistory />} />
                 <Route path="/" element={<Homepage />} />

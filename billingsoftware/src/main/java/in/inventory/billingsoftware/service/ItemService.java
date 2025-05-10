@@ -14,4 +14,6 @@ public interface ItemService {
     List<ItemResponse> fetchItems();
 
     void deleteItem(String itemId);
+
+    ItemResponse updateStock(String itemId, Integer quantity);
 }

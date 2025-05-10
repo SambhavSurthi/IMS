@@ -1,29 +1,39 @@
-import { useState, useEffect } from "react"
-import "./Navbar.css"
+import { useState, useEffect } from "react";
+import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ scrollY }) => {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [navbarClass, setNavbarClass] = useState("")
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [navbarClass, setNavbarClass] = useState("");
 
   useEffect(() => {
     if (scrollY > 80) {
-      setNavbarClass("navbar-scrolled")
+      setNavbarClass("navbar-scrolled");
     } else {
-      setNavbarClass("")
+      setNavbarClass("");
     }
-  }, [scrollY])
+  }, [scrollY]);
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen)
-  }
+    setMenuOpen(!menuOpen);
+  };
 
   return (
     <nav className={`navbar ${navbarClass} ${menuOpen ? "menu-open" : ""}`}>
       <div className="navbar-containerr">
-        <div className="logo">
-          <h1>InventoPro</h1>
+        <div
+          className="logo"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/", { replace: true })}
+        >
+          <h1>IMS</h1>
         </div>
-        <div className={`menu-toggle ${menuOpen ? "active" : ""}`} onClick={toggleMenu}>
+
+        <div
+          className={`menu-toggle ${menuOpen ? "active" : ""}`}
+          onClick={toggleMenu}
+        >
           <span></span>
           <span></span>
           <span></span>
@@ -55,14 +65,18 @@ const Navbar = ({ scrollY }) => {
             </a>
           </li>
           <li>
-            <a href="/login" className="login-btn" onClick={() => setMenuOpen(false)}>
+            <a
+              href="/login"
+              className="login-btn"
+              onClick={() => setMenuOpen(false)}
+            >
               Login
             </a>
           </li>
         </ul>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

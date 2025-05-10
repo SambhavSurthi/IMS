@@ -33,6 +33,13 @@ public class ItemController {
         }
     }
 
+    @PatchMapping("/admin/items/{itemId}/stock")
+    public ItemResponse updateStock(
+            @PathVariable String itemId,
+            @RequestParam Integer quantity) {
+        return itemService.updateStock(itemId, quantity);
+    }
+
     @GetMapping("/items")
     public List<ItemResponse> readItems() {
         return itemService.fetchItems();
