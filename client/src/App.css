@@ -1,0 +1,5 @@
+/* index.css or global.css */
+html, body, #root {
+  height: auto;
+  overflow-y: auto;
+}
